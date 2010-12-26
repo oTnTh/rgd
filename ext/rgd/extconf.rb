@@ -7,7 +7,7 @@ end
 
 abort 'libgd is missing.' unless have_library('gd')
 have_func('gdImageCreateFromBmp', 'gd.h')
-['z', 'png', 'jpeg', 'xpm', 'freetype', 'fontconfig'].each do |lib|
+['z', 'png', 'jpeg', 'Xpm', 'freetype', 'fontconfig'].each do |lib|
   have_library(lib)
 end
 
