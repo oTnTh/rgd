@@ -1,2 +1,2 @@
 # coding: utf-8
-require 'rgd/rgd'
+require "rgd/#{RUBY_VERSION.sub(/\.\d+$/, '')}/rgd"

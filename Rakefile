@@ -9,7 +9,7 @@ require 'rake/testtask'
 
 spec = Gem::Specification.new do |s|
   s.name = 'rgd'
-  s.version = '0.3.2a'
+  s.version = '0.4.1a'
   s.has_rdoc = true
   s.extra_rdoc_files = ['README', 'COPYING']
   s.summary = 'libgd binding for Ruby'
@@ -18,26 +18,13 @@ spec = Gem::Specification.new do |s|
   s.email = ''
   s.homepage = 'http://otnth.blogspot.com'
   # s.executables = ['your_executable_here']
-  s.files = %w(COPYING README Rakefile) + Dir.glob("{bin,ext,lib,spec}/**/*")
+  s.files = %w(BSDL COPYING Rakefile README) + Dir.glob("{bin,ext,lib,test}/**/*")
   s.require_path = "lib"
   s.bindir = "bin"
-  s.extensions = 'ext/rgd/extconf.rb'
-end
-
-CLEAN.include ['pkg', '**/*.o', '**/*.log', '**/*.def', '**/Makefile', 'ext/**/*.so']
-task :build => :clean do
-  spec.extensions.each do |extconf|
-    Dir.chdir(File.dirname(File.expand_path(extconf))) do
-      unless sh "ruby #{File.basename(extconf)}"
-        $stderr.puts "Failed to run extconf"
-        break
-      end
-      
-      unless sh "make"
-        $stderr.puts "Failed to make"
-        break
-      end
-    end
+  if $WIN32 then
+    s.platform = Gem::Platform::CURRENT
+  else
+    s.extensions = 'ext/rgd/extconf.rb'
   end
 end
 
@@ -52,7 +39,7 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.add(files)
   rdoc.main = "README" # page to start on
   rdoc.title = "RGD Docs"
-  rdoc.rdoc_dir = 'doc/rdoc' # rdoc output folder
+  rdoc.rdoc_dir = 'doc' # rdoc output folder
   rdoc.options << '--line-numbers'
 end
 
