@@ -7,7 +7,6 @@ m.filled_ellipse(25, 25, 30, 40, 0x50FFFFFF)
 
 n = RGD::Image.create_truecolor(50, 50)
 n.copy_rotated(m, 25, 25, 0, 0, 50, 50, 60)
-n.png('t.png')
 
 basename = File.basename(__FILE__, '.rb')
 t = RGD::Image.new(basename + '.png')
