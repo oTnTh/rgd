@@ -4,8 +4,8 @@ FILE_PATH = File.expand_path(__FILE__)
 FILE_DIR = File.dirname(FILE_PATH)
 
 begin
-  require File.join(FILE_DIR, '../lib/rgd/version')
   require File.join(FILE_DIR, '../ext/rgd/rgd')
+  require File.join(FILE_DIR, '../lib/rgd/version')
 rescue Exception => e
   require 'rubygems'
   require 'rgd'
