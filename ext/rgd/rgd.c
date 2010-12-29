@@ -2970,6 +2970,7 @@ void Init_rgd() {
     rb_define_method(rb_cImage, "data", image_data, -1);
     rb_define_method(rb_cImage, "clone", image_clone, 0);
     rb_define_method(rb_cImage, "to_palette", image_to_palette, -1);
+    rb_define_alias(rb_cImage, "text", "stringft");
 
     // Init
     gdFontCacheSetup();
