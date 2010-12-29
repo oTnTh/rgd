@@ -7,16 +7,18 @@ require 'rake/gempackagetask'
 require 'rake/rdoctask'
 require 'rake/testtask'
 
+require File.join(File.dirname(File.expand_path(__FILE__)), 'lib/rgd/version')
+
 spec = Gem::Specification.new do |s|
   s.name = 'rgd'
-  s.version = '0.4.1a'
+  s.version = RGD::VERSION
   s.has_rdoc = true
   s.extra_rdoc_files = ['README', 'COPYING']
   s.summary = 'libgd binding for Ruby'
   s.description = s.summary
   s.author = 'oCameLo'
   s.email = ''
-  s.homepage = 'http://otnth.blogspot.com'
+  s.homepage = 'https://github.com/oTnTh/rgd'
   # s.executables = ['your_executable_here']
   s.files = %w(BSDL COPYING Rakefile README) + Dir.glob("{bin,ext,lib,test}/**/*")
   s.require_path = "lib"
@@ -25,6 +27,23 @@ spec = Gem::Specification.new do |s|
     s.platform = Gem::Platform::CURRENT
   else
     s.extensions = 'ext/rgd/extconf.rb'
+  end
+end
+
+CLEAN.include ['pkg', '**/*.o', '**/*.log', '**/*.def', '**/Makefile', 'ext/**/*.so']
+task :build => :clean do
+  spec.extensions.each do |extconf|
+    Dir.chdir(File.dirname(File.expand_path(extconf))) do
+      unless sh "ruby #{File.basename(extconf)}"
+        $stderr.puts "Failed to run extconf"
+        break
+      end
+
+      unless sh "make"
+        $stderr.puts "Failed to make"
+        break
+      end
+    end
   end
 end
 
