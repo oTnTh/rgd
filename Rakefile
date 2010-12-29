@@ -13,14 +13,14 @@ spec = Gem::Specification.new do |s|
   s.name = 'rgd'
   s.version = RGD::VERSION
   s.has_rdoc = true
-  s.extra_rdoc_files = ['README', 'COPYING']
+  s.extra_rdoc_files = ['README.rdoc', 'COPYING.rdoc']
   s.summary = 'libgd binding for Ruby'
   s.description = s.summary
   s.author = 'oCameLo'
   s.email = ''
   s.homepage = 'https://github.com/oTnTh/rgd'
   # s.executables = ['your_executable_here']
-  s.files = %w(BSDL COPYING Rakefile README) + Dir.glob("{bin,ext,lib,test}/**/*")
+  s.files = %w(BSDL COPYING.rdoc Rakefile README.rdoc) + Dir.glob("{bin,ext,lib,test}/**/*")
   s.require_path = "lib"
   s.bindir = "bin"
   if $WIN32 then
@@ -54,9 +54,9 @@ Rake::GemPackageTask.new(spec) do |pkg|
 end
 
 Rake::RDocTask.new do |rdoc|
-  files =['README', 'COPYING', 'lib/**/*.rb'] + Dir.glob("ext/**/*.c")
+  files =['README.rdoc', 'COPYING.rdoc', 'lib/**/*.rb'] + Dir.glob("ext/**/*.c")
   rdoc.rdoc_files.add(files)
-  rdoc.main = "README" # page to start on
+  rdoc.main = "README.rdoc" # page to start on
   rdoc.title = "RGD Docs"
   rdoc.rdoc_dir = 'doc' # rdoc output folder
   rdoc.options << '--line-numbers'
